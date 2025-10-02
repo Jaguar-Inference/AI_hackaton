@@ -52,23 +52,21 @@
 
 ## Backend
 
-- `MONAI.py` —
+- `MONAI.py` — модель машинного обучения
 	
-- `Update MONAI.py` —
+- `api.py` — API
 	
-- `api.py` —
+- `loader.py` — обработка вводных данных
 	
-- `loader.py` —
-	
-- `main.dockerfile` —
+- `main.dockerfile` — Докер-образ 
 
-- `main.py` —
+- `main.py` — главный файл
 
-- `process_uploaded.py` —
+- `process_uploaded.py` — преобразование данных
 
-- `reporter.py` —
+- `reporter.py` — создание отчета
 
-- `volume_utils.py` —
+- `volume_utils.py` — преобразование и работа с numpy массивами 3D-снимков
 
 ## Руководство по развертыванию
 
