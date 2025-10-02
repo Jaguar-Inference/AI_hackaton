@@ -1,5 +1,6 @@
 import MONAI
 import reporter
+import tempfile, zipfile
 
 import flask
 
@@ -20,9 +21,22 @@ def monai_infer(volume):
             print("The volume couldn't be processed by MONAI")
             raise ValueError(f"Error on CT volume processing: {e}")
 
+
+def handle_uploaded_file(zip_path: str) -> str:
+    """
+    Принимает путь к zip-файлу,
+    распаковывает во временную директорию,
+    вызывает reporter.process и возвращает путь к отчёту (.xlsx).
+    """
+    with tempfile.TemporaryDirectory() as temp_dir:
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(temp_dir)
+
+        xlsx_file = reporter.process(temp_dir, monai_infer)
+        return xlsx_file.name  # возвращаем путь к готовому файлу
+
 # Фласка нет, а надо
 if __name__ == "__main__":
-    import tempfile, zipfile
     ds_path = r"C:\Users\goroh\Downloads\Датасет.zip"
 
     with tempfile.TemporaryDirectory() as temp_dir:
